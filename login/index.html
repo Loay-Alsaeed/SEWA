@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>SEWA APP | login</title>
+</head>
+<body>
+    <div class="wrapper">
+        <span class="bg-animate"></span>
+        <span class="bg-animate2"></span>
+
+        <div class="form-box login">
+            <h2 class="animation" style="--i:0; --j:20;">Login</h2>
+            <form action="#" method="post" onsubmit="login(event)">
+                <div class="input-box animation" style="--i:1; --j:21;">
+                    <input type="email" name="email" id="email" required>
+                    <label for="email">Email</label>
+                    <i class='bx bxs-envelope' ></i>
+                </div>
+                <div class="input-box animation" style="--i:2; --j:22;">
+                    <input type="password" name="password" id="password" required>
+                    <label for="password">Password</label>
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <button type="submit" class="btn animation" style="--i:3; --j:23;">Login</button>
+                <div class="logreg-link animation" style="--i:4; --j:24;">
+                    <p>Don't have an account? 
+                        <a href="#" class="register-link">Sign Up</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="info-text login">
+            <h2 class="animation" style="--i:0; --j:20;">Welcome Back!</h2>
+            <p class="animation" style="--i:1; --j:21;">Enter your username and password to access your account.</p>
+        </div>
+        <!-- start register -->
+        <div class="form-box register">
+            <h2 class="animation" style="--i:20; --j:0;">Sign Up</h2>
+            
+            <form action="#" method="post" onsubmit="register(event)">
+                <div class="input-box animation" style="--i:21; --j:1;">
+                    <input name="r-name" id="r-name" type="text" required>
+                    <label for="r-name">Username</label>
+                    <i class='bx bxs-user'></i>
+                </div>
+                <div class="input-box animation" style="--i:21; --j:1;">
+                    <input name="r-phone" id="r-phone" type="text" required>
+                    <label for="r-phone">Phone</label>
+                    <i class='bx bx-phone-call' ></i>
+                </div>
+                <div class="input-box animation" style="--i:22; --j:2;">
+                    <input name="r-email" id="r-email" type="email" required>
+                    <label for="r-email">Email</label>
+                    <i class='bx bxs-envelope' ></i>
+                </div>
+                <div class="input-box animation" style="--i:23; --j:3;">
+                    <input name="r-password" id="r-password" type="password" required>
+                    <label for="r-password">Password</label>
+                    <i class='bx bxs-lock-alt' ></i>
+                </div>
+                <button type="submit" class="btn animation" style="--i:24; --j:4;">Sign Up</button>
+                <div class="logreg-link animation" style="--i:25; --j:5;">
+                    <p>Already have an account? 
+                        <a href="#" class="login-link">Login</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="info-text register">
+            <h2 class="animation" style="--i:20; --j:0;">Welcome!</h2>
+            <p class="animation" style="--i:21; --j:1;">Enter your username, email and password to create new account.</p>
+        </div>
+    </div>
+    
+    <Script src = "index.js"></Script>
+</body>
+</html>
