@@ -4,7 +4,6 @@
   --second-bg-color: #22283f;
   --therd-bg-color: #2d343f;
   --main-color: #13cad5;
-  /* --main-color: #13cad5; */
   --other-color: #c3cad5;
 
   --h1-font: 2rem;
@@ -285,6 +284,10 @@ body {
 .avatar .image {
   display: inline-block;
   margin-right: 10px;
+  height: 40px;
+}
+.avatar .image img {
+  border-radius: 50px;
 }
 .avatar .uplaodImage {
   display: flex;

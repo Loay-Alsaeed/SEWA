@@ -14,15 +14,36 @@
       href="https://unpkg.com/boxicons@latest/css/boxicons.min.css"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="loading.css">
+    <link rel="stylesheet" href="notification.css">
     <title>SEWA APP</title>
   </head>
   <body>
+    <!-- loading page -->
+    <div id="loading">
+      <div class="loading-overlay">
+        <div class="loading-content">
+          <p>Loading, please wait...</p>
+          <div class="loading-line">
+            <span class="light"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- loading page -->
     <!-- start header -->
     <header class="header">
+
+      <div id="notification" class="notification hidden">
+        <span class="message"></span> 
+        <button class="close" onclick="closeNotification()">×</button>
+      </div>
+
       <div class="icon">
         <h1>SEWA</h1>
         <div class="search">
-          <input type="search" /><i class="bx bx-search-alt-2"></i>
+          <label for="search"></label>
+          <input name="search" id="search" type="search" /><i class="bx bx-search-alt-2"></i>
         </div>
       </div>
       <nav class="navItems">
@@ -63,50 +84,19 @@
             <p>Avatar</p>
             <div class="uplaodImage">
               <div class="image">
-                <img
-                  src="./image/profile.png"
-                  alt="profile image"
-                  width="40px"
-                  height="40px"
-                />
+                <img src="./image/profile.png" alt="profile image" width="40px" height="40px"/>
               </div>
               <input type="file" id="file" class="file-input" />
               <label for="file" class="custom-file-label">Upload Image</label>
             </div>
           </div>
-          <form
-            class="editInformation"
-            action="#"
-            method="post"
-            onsubmit="editProfile(event)"
-          >
+          <form class="editInformation" action="#"  method="post" onsubmit="editProfile(event)">
             <label for="firstname">Frist Name</label>
-            <input
-              name="firstname"
-              id="firstname"
-              type="text"
-              placeholder="Text here..."
-              required
-            />
-
+            <input name="firstname" id="firstname" type="text" placeholder="Text here..." required/>
             <label for="lastname">Last Name</label>
-            <input
-              name="lastname"
-              id="lastname"
-              type="text"
-              placeholder="Text here..."
-              required
-            />
-
+            <input name="lastname" id="lastname" type="text" placeholder="Text here..." required/>
             <label for="phone">Phone</label>
-            <input
-              name="phone"
-              id="phone"
-              type="text"
-              placeholder="+9627XXXXXXXX"
-              required
-            />
-
+            <input name="phone" id="phone" type="text" placeholder="+9627XXXXXXXX" required/>
             <button type="submit" class="edit-btn">Edit</button>
           </form>
         </div>
@@ -117,11 +107,11 @@
             <div class="change-color">
               <div class="main-color color-section">
                 <label for="color" class="color">main color</label>
-                <input type="color" id="color" />
+                <input name="color" type="color" id="color" />
               </div>
               <div class="background-color color-section">
-              <label for="background-color" class="color">background color</label>
-              <input type="color" id="backgroundColor" class="">
+              <label for="backgroundColor" class="color">background color</label>
+              <input name="backgroundColor" type="color" id="backgroundColor" class="">
               </div>
             </div>
               <button id="defaultColor">set default</button>
@@ -159,15 +149,10 @@
         <div class="content">
           <div class="contentText">
             <section>
-              <!-- <h2>Our Mission</h2> -->
-              <p>
-                We believe that learning is the key to success, so we strive to provide a unique experience that meets the needs of students and helps them achieve their ambitions.
-              </p>
+              <p>We believe that learning is the key to success, so we strive to provide a unique experience that meets the needs of students and helps them achieve their ambitions.</p>
             </section>
             <section>
-              <p>
-                Learn about our vision, mission and the team that works hard to make your educational experience unique.
-              </p>
+              <p>Learn about our vision, mission and the team that works hard to make your educational experience unique.</p>
             </section>
           </div>
           <section>
@@ -256,34 +241,10 @@
         <h2>Contact <span>Us</span></h2>
       </div>
       <div class="contact-form" data-aos="zoom-in">
-        <form
-          id="contact-form"
-          method="post"
-          action="#"
-          onsubmit="contactUs(event)"
-        >
-          <input
-            id="contactName"
-            type="text"
-            name="name"
-            placeholder="Your name ..."
-            required
-          />
-          <input
-            id="contactEmail"
-            type="email"
-            name="email"
-            placeholder="Email Address ..."
-            required
-          />
-          <textarea
-            name="message"
-            id="contactMessage"
-            cols="30"
-            rows="10"
-            placeholder="Write Message Here."
-            required
-          ></textarea>
+        <form id="contact-form" method="post" action="#" onsubmit="contactUs(event)" >
+          <input id="contactName" type="text" name="name" placeholder="Your name ..." required />
+          <input id="contactEmail" type="email" name="email" placeholder="Email Address ..." required />
+          <textarea name="message" id="contactMessage" cols="30" rows="10" placeholder="Write Message Here." required></textarea>
           <input type="submit" value="Send Message" class="send-btn" />
         </form>
       </div>

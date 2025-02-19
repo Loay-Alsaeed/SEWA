@@ -11,10 +11,47 @@ const profile_icon = document.getElementById("profile-icon");
 const course_paragraph = document.querySelector(".courses-p");
 const profile_btn = document.getElementById("profileItem");
 const color_btn = document.getElementById("colorItem");
+const input_image = document.getElementById("file");
+const profile_image = document.querySelector(".uplaodImage .image img");
 
+// show and hidden loading page
+function showLoading() {
+  document.getElementById("loading").style.display = "block";
+}
+
+function hideLoading() {
+  document.getElementById("loading").style.display = "none";
+}
+
+// controll with the notifecation message
+// دالة لإظهار الإشعار
+function showNotification(message, type = "success") {
+  const notification = document.getElementById("notification");
+  const messageElement = notification.querySelector(".message");
+
+  // تغيير نوع الإشعار
+  notification.className = `notification ${type}`;
+  messageElement.textContent = message;
+  notification.classList.remove("hidden");
+  notification.classList.add("show");
+
+  // إخفاء الإشعار بعد 5 ثواني
+  setTimeout(closeNotification, 5000);
+}
+
+// دالة لإغلاق الإشعار
+function closeNotification() {
+  const notification = document.getElementById("notification");
+  notification.classList.remove("show");
+  notification.classList.add("hidden");
+}
+
+// showNotification("تم التسجيل بنجاح!", "success");
+// showNotification("حدث خطأ أثناء التسجيل، حاول مجددًا.", "error");
+// showNotification("تنبيه: يجب إدخال جميع البيانات.", "warning");
 
 // log out
-logout.onclick = () => {
+logout_btn.onclick = () => {
   window.sessionStorage.clear();
   profile_nav.classList.remove("active");
   edit_profile.classList.remove("active");
@@ -90,8 +127,10 @@ if (isLogin) {
 
 // Get Available Courses
 const getCourseData = async () => {
+  showLoading();
+  // console.log("show loading");
   let cards = document.querySelector(".cards");
-  cards.innerHTML = ""; 
+  cards.innerHTML = "";
 
   if (isLogin) {
     try {
@@ -148,11 +187,14 @@ const getCourseData = async () => {
         cards.appendChild(card);
       });
     } catch (error) {
+      showNotification("Can't get Courses Data, please try again!", "error");
       console.error("Error fetching courses:", error);
       cards.innerHTML =
         "<p style='color: red;'>Failed to load courses. Please try again later.</p>";
     }
   }
+  hideLoading();
+  console.log("Hide loading");
 };
 getCourseData();
 
@@ -160,15 +202,11 @@ getCourseData();
 document.addEventListener("click", async (e) => {
   // e.preventDefault()
   if (e.target.classList.contains("registerbtn")) {
+    showLoading();
     const courseCard = e.target.closest(".card");
     const courseId = courseCard.querySelector(".text p").textContent;
     const courseName = courseCard.querySelector(".text h2").textContent;
     const token = window.sessionStorage.getItem("user_token");
-
-    if (!token) {
-      alert("User not logged in.");
-      return;
-    }
 
     try {
       const response = await fetch(
@@ -199,18 +237,21 @@ document.addEventListener("click", async (e) => {
         modal.style.display = "block";
       } else {
         console.log(result.message);
-        alert(result.message);
+        showNotification("SomeThing Wrong try again ", "warning");
       }
     } catch (error) {
       console.error("Error:", error.message);
-      alert("Failed to fetch user data.");
+      showNotification("Failed to fetch user data", "error");
     }
+    hideLoading();
   }
 });
 
 // register course
 document.addEventListener("click", async (e) => {
   if (e.target.classList.contains("registerCourse")) {
+    e.preventDefault();
+    showLoading();
     const token = window.sessionStorage.getItem("user_token");
     const course_id = document.querySelector(
       "#registrationForm #courseId"
@@ -242,17 +283,16 @@ document.addEventListener("click", async (e) => {
       const result = await response.json();
       if (result.status === "success") {
         console.log("registration successful: ", result.message);
-        console.log("Registration Successful");
-        alert("Registration Successful");
-
+        showNotification("registration successful", "success");
       } else {
         console.log(result.message);
-        alert(result.message);
+        showNotification("Something Went Wronge, please try again", "warning");
       }
     } catch (error) {
       console.error("Error:", error.message);
-      alert("Failed to register in course.");
+      showNotification("Failed to register in course.", "error");
     }
+    hideLoading();
   }
 });
 
@@ -263,14 +303,14 @@ document.querySelector(".close").addEventListener("click", () => {
 // contact us form
 const contactUs = async (e) => {
   e.preventDefault();
-
+  showLoading();
   const token = window.sessionStorage.getItem("user_token");
   const name = document.querySelector("#contactName").value;
   const email = document.querySelector("#contactEmail").value;
   const message = document.querySelector("#contactMessage").value;
 
   if (!token) {
-    alert("user not logged in");
+    showNotification("login first to contact with us", "warning");
   }
   try {
     const response = await fetch("http://localhost/sewa_app/inquiry.php", {
@@ -287,14 +327,16 @@ const contactUs = async (e) => {
 
     const result = await response.json();
     if (result.status === "success") {
-      alert("Inquiry submitted successfully");
+      showNotification("Inquiry submitted successfully", "success");
     } else {
-      alert("failed: " + result.message);
+      console.log("failed: " + result.message);
+      showNotification(result.message, "warning");
     }
   } catch (error) {
     console.error("Error:", error.message);
-    alert("An error occurred while send message.");
+    showNotification("An error occurred while send message", "error");
   }
+  hideLoading();
 };
 
 //edit profile form
@@ -307,7 +349,7 @@ const editProfile = async (e) => {
   const phone = document.getElementById("phone").value;
 
   if (!token) {
-    alert("user not logged in");
+    showNotification("login first edit your profile", "warning");
   }
 
   try {
@@ -329,12 +371,17 @@ const editProfile = async (e) => {
 
     const result = await response.json();
     if (result.status === "success") {
-      alert("Update Profile Successfuly.");
+      showNotification("Update Profile Successfuly", "success");
     } else {
       alert("failed: " + result.message);
     }
   } catch (error) {
     console.error("Error:", error.message);
-    alert("An error occurred while Update Profile.");
+    showNotification("An error occurred while Update Profile", "error");
   }
 };
+// edit profile image
+
+input_image.addEventListener("change", () => {
+  profile_image.src = URL.createObjectURL(input_image.files[0]);
+});
