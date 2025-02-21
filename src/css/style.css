@@ -61,7 +61,7 @@ body {
   align-items: center;
 }
 .icon h1 {
-  color: var(--text-color);
+  color: var(--main-color);
   padding-right: 5%;
   letter-spacing: 2px;
   border-right: 2px solid var(--main-color);

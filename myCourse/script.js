@@ -20,7 +20,7 @@ const getMyCourseData = async () => {
           card.innerHTML = `
               <div class="cardinner">
                 <div class="cardfront">
-                  <img src="./../image/images.jpeg" alt="" width="350">
+                  <img src="../src/image/images.jpeg" alt="" width="350">
                   <div class="text">
                     <p class="hidden course-id">${course.course_id}</p>
                     <h2>${course.course_name}</h2>
@@ -37,6 +37,7 @@ const getMyCourseData = async () => {
               </div>`;
 
           let cards = document.querySelector(".course-container");
+          cards.innerHTML = "";
           cards.appendChild(card);
         });
 
@@ -49,7 +50,6 @@ const getMyCourseData = async () => {
       }
     });
 };
-
 
 const removeCourse = async (courseId) => {
   const token = window.sessionStorage.getItem("user_token");
@@ -66,17 +66,18 @@ const removeCourse = async (courseId) => {
       }
     );
 
-    const data = await response.json(); 
+    const data = await response.json();
 
     if (data.status === "success") {
-      alert("Course removed successfully!");
       window.location.reload();
+      showNotification("Course removed successfully", "success");
+      console.log("Course removed successfully");
     } else {
-      alert("Error: " + data.message);
+      showNotification("Failed to Remove Course, Try Again!", "error");
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("Something went wrong. Check console for details.");
+    showNotification("Failed to fetch Data, Try Again", "error");
   }
 };
 

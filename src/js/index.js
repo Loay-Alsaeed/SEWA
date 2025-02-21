@@ -23,32 +23,7 @@ function hideLoading() {
   document.getElementById("loading").style.display = "none";
 }
 
-// controll with the notifecation message
-// دالة لإظهار الإشعار
-function showNotification(message, type = "success") {
-  const notification = document.getElementById("notification");
-  const messageElement = notification.querySelector(".message");
 
-  // تغيير نوع الإشعار
-  notification.className = `notification ${type}`;
-  messageElement.textContent = message;
-  notification.classList.remove("hidden");
-  notification.classList.add("show");
-
-  // إخفاء الإشعار بعد 5 ثواني
-  setTimeout(closeNotification, 5000);
-}
-
-// دالة لإغلاق الإشعار
-function closeNotification() {
-  const notification = document.getElementById("notification");
-  notification.classList.remove("show");
-  notification.classList.add("hidden");
-}
-
-// showNotification("تم التسجيل بنجاح!", "success");
-// showNotification("حدث خطأ أثناء التسجيل، حاول مجددًا.", "error");
-// showNotification("تنبيه: يجب إدخال جميع البيانات.", "warning");
 
 // log out
 logout_btn.onclick = () => {
@@ -156,30 +131,20 @@ const getCourseData = async () => {
         card.innerHTML = `
           <div class="cardinner">
             <div class="cardfront">
-              <img src="./image/images.jpeg" alt="" width="350">
+              <img src="src/image/images.jpeg" alt="" width="350">
               <div class="text">
                 <p class="hidden">${course.course_id}</p>
                 <h2>${course.course_name}</h2>
                 <p><strong>Duration:</strong> ${course.duration}</p>
                 <p><strong>Fees:</strong> $${course.fees}</p>
-                <p><strong>Student:</strong> ${course.current_students}/${
-          course.max_students
-        }</p>
+                <p><strong>Student:</strong> ${course.current_students}/${course.max_students}</p>
               </div>
             </div>
             <div class="cardback">
               <p>${course.description}</p>
               <button class="button registerbtn" href="#registrationForm"
-                ${
-                  course.current_students >= course.max_students
-                    ? "disabled"
-                    : ""
-                }>
-                ${
-                  course.current_students >= course.max_students
-                    ? "Full"
-                    : "Register"
-                }
+                ${course.current_students >= course.max_students? "disabled" : ""}>
+                ${course.current_students >= course.max_students? "Full" : "Register"}
               </button>
             </div>
           </div>`;
