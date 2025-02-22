@@ -23,8 +23,6 @@ function hideLoading() {
   document.getElementById("loading").style.display = "none";
 }
 
-
-
 // log out
 logout_btn.onclick = () => {
   window.sessionStorage.clear();
@@ -127,7 +125,7 @@ const getCourseData = async () => {
 
       result.forEach((course) => {
         let card = document.createElement("div");
-        card.className = "card";
+        card.className = "card scroll";
         card.innerHTML = `
           <div class="cardinner">
             <div class="cardfront">
@@ -137,22 +135,34 @@ const getCourseData = async () => {
                 <h2>${course.course_name}</h2>
                 <p><strong>Duration:</strong> ${course.duration}</p>
                 <p><strong>Fees:</strong> $${course.fees}</p>
-                <p><strong>Student:</strong> ${course.current_students}/${course.max_students}</p>
+                <p><strong>Student:</strong> ${course.current_students}/${
+          course.max_students
+        }</p>
               </div>
             </div>
             <div class="cardback">
               <p>${course.description}</p>
               <button class="button registerbtn" href="#registrationForm"
-                ${course.current_students >= course.max_students? "disabled" : ""}>
-                ${course.current_students >= course.max_students? "Full" : "Register"}
+                ${
+                  course.current_students >= course.max_students
+                    ? "disabled"
+                    : ""
+                }>
+                ${
+                  course.current_students >= course.max_students
+                    ? "Full"
+                    : "Register"
+                }
               </button>
             </div>
           </div>`;
 
         cards.appendChild(card);
+        hideLoading();
       });
     } catch (error) {
-      showNotification("Can't get Courses Data, please try again!", "error");
+      hideLoading();
+      // showNotification("Can't get Courses Data, please try again!", "warning");
       console.error("Error fetching courses:", error);
       cards.innerHTML =
         "<p style='color: red;'>Failed to load courses. Please try again later.</p>";
@@ -248,21 +258,30 @@ document.addEventListener("click", async (e) => {
       const result = await response.json();
       if (result.status === "success") {
         console.log("registration successful: ", result.message);
+        hideLoading();
         showNotification("registration successful", "success");
       } else {
         console.log(result.message);
+        hideLoading();
         showNotification("Something Went Wronge, please try again", "warning");
       }
     } catch (error) {
       console.error("Error:", error.message);
       showNotification("Failed to register in course.", "error");
     }
+    register_form.style.display = "none";
     hideLoading();
   }
 });
 
 document.querySelector(".close").addEventListener("click", () => {
-  document.getElementById("registrationForm").style.display = "none";
+  register_form.style.display = "none";
+});
+document.addEventListener("scroll", () => {
+  register_form.style.display = "none";
+  profile_nav.classList.remove("active");
+  edit_profile.classList.remove("active");
+  color_section.classList.remove("active");
 });
 
 // contact us form
@@ -345,8 +364,8 @@ const editProfile = async (e) => {
     showNotification("An error occurred while Update Profile", "error");
   }
 };
-// edit profile image
 
+// edit profile image
 input_image.addEventListener("change", () => {
   profile_image.src = URL.createObjectURL(input_image.files[0]);
 });

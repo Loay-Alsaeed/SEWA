@@ -30,12 +30,11 @@
     </div>
     <!-- loading page -->
     <!-- start header -->
+    <div id="notification" class="notification hidden">
+      <span class="message"></span>
+      <button class="close" onclick="closeNotification()">×</button>
+    </div>
     <header class="header">
-
-      <div id="notification" class="notification hidden">
-        <span class="message"></span> 
-        <button class="close" onclick="closeNotification()">×</button>
-      </div>
 
       <div class="icon">
         <h1>SEWA</h1>
@@ -123,12 +122,12 @@
     <main class="home" id="home">
       <div class="main-text home-text">
         <div class="home-content">
-          <div class="text">
-            <h1>Welcome In SEWA APP</h1>
-            <p>
+          <div class="text ">
+            <h1 class="scroll">Welcome In SEWA APP</h1>
+            <p class="scroll">
               We are here to help you access the best educational courses in an easy and simple way.
             </p>
-            <p>
+            <p class="scroll">
               Browse our available courses, enroll in the programs that suit you, and start your educational journey with us today!
             </p>
           </div>
@@ -145,28 +144,28 @@
       <div class="main-text">
         <h1 class="title">About <span>Us</span></h1>
         <div class="content">
-          <div class="contentText">
-            <section>
-              <p>We believe that learning is the key to success, so we strive to provide a unique experience that meets the needs of students and helps them achieve their ambitions.</p>
+          <div class="contentText scroll">
+            <section class="scroll">
+              <p class="scroll">We believe that learning is the key to success, so we strive to provide a unique experience that meets the needs of students and helps them achieve their ambitions.</p>
             </section>
             <section>
               <p>Learn about our vision, mission and the team that works hard to make your educational experience unique.</p>
             </section>
           </div>
-          <section>
+          <section class="scroll">
             <h2>Our Team</h2>
-            <div class="team">
-              <div class="team-member member1">
+            <div class="team scroll ">
+              <div class="team-member member1 scroll">
                 <img src="src/image/member1.jpeg" alt="Ahmed Ali" />
                 <h3>Ahmed Ali</h3>
                 <p>Founder & CEO</p>
               </div>
-              <div class="team-member member 2">
+              <div class="team-member member 2 scroll">
                 <img src="src/image/member2.jpg" alt="Mona Mohamed" />
                 <h3>Ahmed Mohamed</h3>
                 <p>Operations Manager</p>
               </div>
-              <div class="team-member member3">
+              <div class="team-member member3 scroll">
                 <img src="src/image/member3.jpg" alt="Khaled Hassan" />
                 <h3>Khaled Hassan</h3>
                 <p>Chief Technology Officer</p>
@@ -189,7 +188,7 @@
     <!-- end course  -->
     <!-- start form register in course -->
 
-    <main id="registrationForm" class="modal" style="display: none">
+    <main id="registrationForm" class="modal scroll" style="display: none">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Register in the Course</h2>
@@ -217,7 +216,7 @@
     </main>
     <!-- end form register in course -->
     <!-- start contact us  -->
-    <main class="contact" id="contactus">
+    <main class="contact scroll" id="contactus">
       <div class="center-text" data-aos="fade-down">
         <h2>Contact <span>Us</span></h2>
       </div>

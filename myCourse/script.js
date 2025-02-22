@@ -37,7 +37,6 @@ const getMyCourseData = async () => {
               </div>`;
 
           let cards = document.querySelector(".course-container");
-          cards.innerHTML = "";
           cards.appendChild(card);
         });
 
